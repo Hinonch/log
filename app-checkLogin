@@ -4,5 +4,6 @@
 3.客户端存储accessToken,保留时效性(每次打开app,向服务端请求刷新token,刷新token为上一次的accessToken,服务端返回新token作为accessToken,注意时效性问题)
 4.采用https协议
 5.关于多端口登录问题:
-  方案一:采用登录信息序列化方式存入redis,结构{"id":"","token":[{"token":"","accessTime":""},{"token":"","accessTime":""}]}
-  每次使用token登录验证时
+  方案一:采用登录信息序列化方式存入redis,key = "user_{id}", value结构{"id":"","token":[{"token":"","accessTime":""},{"token":"","accessTime":""}]}
+  每次使用token登录验证时,客户端必须携带id,找到"user_{id}",然后遍历token,校对时间以及token,确定是否refresh
+  方案二:采用token与user_info分离的方式存储登录信息token存储,"token":{"id":"","accessTime":""}, "user_{id}":{}
