@@ -1,0 +1,8 @@
+关于app开发,客户端登陆验证方案
+1.采用rsa方案验签
+2.重要数据采用aes加密
+3.客户端存储accessToken,保留时效性(每次打开app,向服务端请求刷新token,刷新token为上一次的accessToken,服务端返回新token作为accessToken,注意时效性问题)
+4.采用https协议
+5.关于多端口登录问题:
+  方案一:采用登录信息序列化方式存入redis,结构{"id":"","token":[{"token":"","accessTime":""},{"token":"","accessTime":""}]}
+  每次使用token登录验证时
