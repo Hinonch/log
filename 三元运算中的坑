@@ -1,0 +1,11 @@
+$a = bool1 ? val1 : val2? val3: val4
+
+执行上述三元运算:
+  整个执行流程为由左向右执行
+  根据 bool1的值取值val1 或者 val2
+  再进行 val1 ? val3 : val4 或者 val2 ? val3 : val4;
+  结果只会是val3 或者 val4
+  所以需要预期结果请用()调整
+  (bool1 ? val1 : val2) ? val3: val4;
+  bool1 ? val1 : (val2? val3: val4);
+    
